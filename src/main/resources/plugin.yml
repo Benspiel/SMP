@@ -1,0 +1,89 @@
+name: SMP
+version: '1.0'
+main: de.ben.smp
+api-version: '1.21'
+
+commands:
+  admin:
+    description: Öffnet das Admin-Menü
+    usage: /admin
+    permission: ouh.admin
+
+  openend:
+    description: End öffnen/schließen
+    permission: ouh.admin.end
+
+  vanish:
+    description: Schaltet Vanish an/aus (unsichtbar mit NightVision)
+    usage: /vanish
+    permission: ouh.vanish
+
+  help:
+    description: Gibt das Willkommens-Buch
+    usage: /help
+
+  tpa:
+    description: Teleportiert dich zu einem Spieler (nach Zustimmung)
+    usage: /tpa <Spieler>
+
+  tpahere:
+    description: Lässt einen Spieler zu dir teleportieren (nach Zustimmung)
+    usage: /tpahere <Spieler>
+
+  tpaccept:
+    description: Akzeptiert eine Teleport-Anfrage
+    usage: /tpaccept
+
+  tpdeny:
+    description: Lehnt eine Teleport-Anfrage ab
+    usage: /tpdeny
+
+  rockets:
+    description: Rockets ein/aus
+    usage: /rockets
+    permission: ouh.admin.rockets
+
+
+permissions:
+  ouh.admin:
+    description: Zugriff auf das Admin-Menü (/admin)
+    default: op
+
+  ouh.admin.item:
+    description: Erhält das Admin-Item (Nether Star beim Join)
+    default: op
+
+  ouh.admin.tpr:
+    description: Erlaubt Random-Teleport zu zufälligen Spielern
+    default: op
+
+  ouh.admin.players:
+    description: Zugriff auf die Spieler-Liste
+    default: op
+
+  ouh.admin.players.tpt:
+    description: Teleport zu bestimmten Spielern aus der Liste
+    default: op
+
+  ouh.admin.players.god:
+    description: Aktivieren/Deaktivieren von God-Mode
+    default: op
+
+  ouh.vanish:
+    description: Erlaubt den /vanish Befehl
+    default: op
+
+  ouh.vanish.item:
+    description: Zeigt die Vanish-Feder im Admin-Menü
+    default: op
+
+  ouh.tpa.cooldown:
+    description: Reduziert den TPA-Cooldown auf 90 Sekunden
+    default: op
+
+  ouh.admin.rockets:
+    description: Darf Rockets toggeln
+    default: op
+
+  ouh.admin.end:
+    default: op
