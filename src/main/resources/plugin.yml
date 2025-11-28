@@ -9,6 +9,10 @@ commands:
     usage: /admin
     permission: ouh.admin
 
+  opennether:
+    description: Nether öffnen/schließen
+    permission: ouh.admin.nether
+
   openend:
     description: End öffnen/schließen
     permission: ouh.admin.end
@@ -45,30 +49,33 @@ commands:
 
 
 permissions:
+
+  # --------------------- ADMIN MENU ----------------------
   ouh.admin:
     description: Zugriff auf das Admin-Menü (/admin)
     default: op
 
   ouh.admin.item:
-    description: Erhält das Admin-Item (Nether Star beim Join)
+    description: Erhält das Admin-Item (Netherstar beim Join)
     default: op
 
   ouh.admin.tpr:
-    description: Erlaubt Random-Teleport zu zufälligen Spielern
+    description: Zufalls-Teleport zu einem Random-Spieler
     default: op
 
   ouh.admin.players:
-    description: Zugriff auf die Spieler-Liste
+    description: Zugriff auf die Spieler-Liste im Admin-Menü
     default: op
 
   ouh.admin.players.tpt:
-    description: Teleport zu bestimmten Spielern aus der Liste
+    description: Erlaubt Teleport zu einem bestimmten Spieler im Admin-Menü
     default: op
 
   ouh.admin.players.god:
-    description: Aktivieren/Deaktivieren von God-Mode
+    description: Darf Godmode im Admin-Menü aktivieren
     default: op
 
+  # --------------------- VANISH ----------------------
   ouh.vanish:
     description: Erlaubt den /vanish Befehl
     default: op
@@ -77,13 +84,21 @@ permissions:
     description: Zeigt die Vanish-Feder im Admin-Menü
     default: op
 
+  # --------------------- TPA SYSTEM ----------------------
   ouh.tpa.cooldown:
     description: Reduziert den TPA-Cooldown auf 90 Sekunden
     default: op
 
+  # --------------------- ROCKETS ----------------------
   ouh.admin.rockets:
     description: Darf Rockets toggeln
     default: op
 
+  # --------------------- END TOGGLE ----------------------
   ouh.admin.end:
+    description: Darf das End öffnen/schließen
+    default: op
+
+  ouh.admin.nether:
+    description: Darf den Nether öffnen/schließen
     default: op

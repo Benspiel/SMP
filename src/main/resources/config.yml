@@ -1,1 +1,4 @@
-rockets-enabled: false
+rockets-enabled: true
+cooldown-seconds: 5
+end-enabled: true
+nether-enabled: true
