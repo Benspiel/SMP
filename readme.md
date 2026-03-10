@@ -180,22 +180,3 @@ Wenn du neue Features brauchst → einfach melden!
 ## 📜 Lizenz
 
 Dieses Plugin darf frei genutzt, angepasst und erweitert werden.
-
----
-
-**Viel Spaß mit deinem SMP Plugin! 🚀**
-
-```
-
----
-
-Wenn du willst, mache ich dir jetzt:
-
-🔥 Ein **README Banner**  
-🔥 Ein **Plugin Icon (PNG)**  
-🔥 Eine **Spigot/MC-Market Beschreibung im HTML-Stil**  
-🔥 Ein **GitHub Release Template**
-
-Sag einfach:  
-👉 **„mach Banner“** oder **„mach Plugin Icon“**
-```
