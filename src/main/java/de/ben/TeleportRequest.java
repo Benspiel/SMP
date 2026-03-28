@@ -50,12 +50,12 @@ public class TeleportRequest implements Listener, CommandExecutor, TabCompleter 
 
         // --- Cooldown prüfen ---
         long now = System.currentTimeMillis();
-        long cdMillis = sender.hasPermission("ouh.tpa.cooldown") ? 90_000L : 360_000L;
+        long cdMillis = sender.hasPermission("fog.tpa.cooldown") ? 90_000L : 360_000L;
         long next = cooldowns.getOrDefault(sender.getUniqueId(), 0L);
 
         if (now < next) {
             long remaining = (next - now) / 1000;
-            sender.sendMessage(ChatColor.RED + "[OUH] Du musst noch " + remaining + " Sekunden warten, bevor du erneut teleportieren kannst.");
+            sender.sendMessage(ChatColor.RED + "[FOG] Du musst noch " + remaining + " Sekunden warten, bevor du erneut teleportieren kannst.");
             return;
         }
 
@@ -68,9 +68,9 @@ public class TeleportRequest implements Listener, CommandExecutor, TabCompleter 
         requests.put(target.getUniqueId(), new Request(sender.getUniqueId(), here));
         cooldowns.put(sender.getUniqueId(), now + cdMillis); // Cooldown setzen
 
-        sender.sendMessage(ChatColor.YELLOW + "[OUH] Anfrage an " + target.getName() + " gesendet.");
+        sender.sendMessage(ChatColor.YELLOW + "[FOG] Anfrage an " + target.getName() + " gesendet.");
 
-        TextComponent base = new TextComponent(ChatColor.GOLD + "[OUH] " + sender.getName() +
+        TextComponent base = new TextComponent(ChatColor.GOLD + "[FOG] " + sender.getName() +
                 (here ? " möchte dich zu sich teleportieren.\n" : " möchte sich zu dir teleportieren.\n"));
         TextComponent accept = new TextComponent(ChatColor.GREEN + "[Annehmen]");
         accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpaccept"));
@@ -84,7 +84,7 @@ public class TeleportRequest implements Listener, CommandExecutor, TabCompleter 
             Request r = requests.get(target.getUniqueId());
             if (r != null && r.sender.equals(sender.getUniqueId())) {
                 requests.remove(target.getUniqueId());
-                sender.sendMessage(ChatColor.GRAY + "[OUH] Anfrage an " + target.getName() + " ist abgelaufen.");
+                sender.sendMessage(ChatColor.GRAY + "[FOG] Anfrage an " + target.getName() + " ist abgelaufen.");
             }
         }, 20L * 60);
     }
@@ -92,18 +92,18 @@ public class TeleportRequest implements Listener, CommandExecutor, TabCompleter 
     private void handleAccept(Player target) {
         Request r = requests.remove(target.getUniqueId());
         if (r == null) {
-            target.sendMessage(ChatColor.RED + "[OUH] Du hast keine Teleport-Anfrage.");
+            target.sendMessage(ChatColor.RED + "[FOG] Du hast keine Teleport-Anfrage.");
             return;
         }
 
         Player sender = Bukkit.getPlayer(r.sender);
         if (sender == null || !sender.isOnline()) {
-            target.sendMessage(ChatColor.RED + "[OUH] Der Spieler ist nicht mehr online.");
+            target.sendMessage(ChatColor.RED + "[FOG] Der Spieler ist nicht mehr online.");
             return;
         }
 
-        sender.sendMessage(ChatColor.YELLOW + "[OUH] Teleport startet in 5 Sekunden – bleib stehen!");
-        target.sendMessage(ChatColor.YELLOW + "[OUH] " + sender.getName() + " wird gleich teleportiert.");
+        sender.sendMessage(ChatColor.YELLOW + "[FOG] Teleport startet in 5 Sekunden – bleib stehen!");
+        target.sendMessage(ChatColor.YELLOW + "[FOG] " + sender.getName() + " wird gleich teleportiert.");
 
         Location start = sender.getLocation().clone();
         Vector startVec = start.toVector();
@@ -125,7 +125,7 @@ public class TeleportRequest implements Listener, CommandExecutor, TabCompleter 
                             net.md_5.bungee.api.ChatMessageType.ACTION_BAR,
                             new TextComponent(ChatColor.RED + "Teleport abgebrochen – du hast dich bewegt!")
                     );
-                    target.sendMessage(ChatColor.GRAY + "[OUH] " + sender.getName() + " hat sich bewegt, Teleport abgebrochen.");
+                    target.sendMessage(ChatColor.GRAY + "[FOG] " + sender.getName() + " hat sich bewegt, Teleport abgebrochen.");
                     cancel();
                     return;
                 }
@@ -157,15 +157,15 @@ public class TeleportRequest implements Listener, CommandExecutor, TabCompleter 
     private void handleDeny(Player target) {
         Request r = requests.remove(target.getUniqueId());
         if (r == null) {
-            target.sendMessage(ChatColor.RED + "[OUH] Du hast keine Teleport-Anfrage.");
+            target.sendMessage(ChatColor.RED + "[FOG] Du hast keine Teleport-Anfrage.");
             return;
         }
 
         Player sender = Bukkit.getPlayer(r.sender);
         if (sender != null && sender.isOnline()) {
-            sender.sendMessage(ChatColor.RED + "[OUH] " + target.getName() + " hat deine Anfrage abgelehnt.");
+            sender.sendMessage(ChatColor.RED + "[FOG] " + target.getName() + " hat deine Anfrage abgelehnt.");
         }
-        target.sendMessage(ChatColor.YELLOW + "[OUH] Du hast die Teleport-Anfrage abgelehnt.");
+        target.sendMessage(ChatColor.YELLOW + "[FOG] Du hast die Teleport-Anfrage abgelehnt.");
     }
 
     @Override

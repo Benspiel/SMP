@@ -12,7 +12,7 @@ import org.bukkit.advancement.AdvancementProgress;
 
 public class Messages implements Listener {
 
-    private static final String PREFIX = ChatColor.DARK_AQUA + "[OUH] " + ChatColor.RESET;
+    private static final String PREFIX = ChatColor.DARK_AQUA + "[FOG] " + ChatColor.RESET;
 
     public static void send(Player p, String msg) {
         p.sendMessage(PREFIX + msg);

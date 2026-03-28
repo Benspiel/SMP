@@ -19,7 +19,7 @@ public class OpenEndCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         if (sender instanceof Player p) {
-            if (!p.hasPermission("ouh.admin.end")) {
+            if (!p.hasPermission("fog.admin.end")) {
                 p.sendMessage(ChatColor.RED + "Keine Rechte!");
                 return true;
             }

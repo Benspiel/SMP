@@ -34,7 +34,6 @@ public final class smp extends JavaPlugin {
 
         // ------------------ FIRST JOIN + HELP ------------------
         FirstJoin firstJoin = new FirstJoin(this);
-        Bukkit.getPluginManager().registerEvents(firstJoin, this);
         getCommand("help").setExecutor(firstJoin);
 
         // ------------------ MESSAGES SYSTEM ------------------
@@ -57,8 +56,8 @@ public final class smp extends JavaPlugin {
         getCommand("rockets").setExecutor(new RocketCommand(this));
         Bukkit.getPluginManager().registerEvents(new RocketListener(this), this);
 
-        // ------------------ END SYSTEM (/openend) ------------------
-        getCommand("openend").setExecutor(new OpenEndCommand(this));
+        // ------------------ END SYSTEM (/end) ------------------
+        getCommand("end").setExecutor(new OpenEndCommand(this));
         Bukkit.getPluginManager().registerEvents(new EndBlocker(this), this);
 
         // ------------------ NETHER SYSTEM (/opennether) ------------------

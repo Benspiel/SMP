@@ -5,33 +5,33 @@ api-version: '1.21'
 
 commands:
   admin:
-    description: Öffnet das Admin-Menü
+    description: Oeffnet das Admin-Menue
     usage: /admin
-    permission: ouh.admin
+    permission: fog.admin
 
   opennether:
-    description: Nether öffnen/schließen
-    permission: ouh.admin.nether
+    description: Nether oeffnen oder schliessen
+    permission: fog.admin.nether
 
-  openend:
-    description: End öffnen/schließen
-    permission: ouh.admin.end
+  end:
+    description: End oeffnen oder schliessen
+    permission: fog.admin.end
 
   vanish:
-    description: Schaltet Vanish an/aus (unsichtbar mit NightVision)
+    description: Schaltet Vanish an oder aus
     usage: /vanish
-    permission: ouh.vanish
+    permission: fog.vanish
 
   help:
     description: Gibt das Willkommens-Buch
     usage: /help
 
   tpa:
-    description: Teleportiert dich zu einem Spieler (nach Zustimmung)
+    description: Teleportiert dich zu einem Spieler nach Zustimmung
     usage: /tpa <Spieler>
 
   tpahere:
-    description: Lässt einen Spieler zu dir teleportieren (nach Zustimmung)
+    description: Laesst einen Spieler zu dir teleportieren nach Zustimmung
     usage: /tpahere <Spieler>
 
   tpaccept:
@@ -43,62 +43,69 @@ commands:
     usage: /tpdeny
 
   rockets:
-    description: Rockets ein/aus
+    description: Rockets ein oder aus
     usage: /rockets
-    permission: ouh.admin.rockets
-
+    permission: fog.admin.rockets
 
 permissions:
-
   # --------------------- ADMIN MENU ----------------------
-  ouh.admin:
-    description: Zugriff auf das Admin-Menü (/admin)
+  fog.admin:
+    description: Zugriff auf das Admin-Menue mit /admin
     default: op
 
-  ouh.admin.item:
-    description: Erhält das Admin-Item (Netherstar beim Join)
+  fog.admin.item:
+    description: Erhaelt das Admin-Item beim Join
     default: op
 
-  ouh.admin.tpr:
-    description: Zufalls-Teleport zu einem Random-Spieler
+  fog.admin.tpr:
+    description: Zufalls-Teleport zu einem anderen Spieler
     default: op
 
-  ouh.admin.players:
-    description: Zugriff auf die Spieler-Liste im Admin-Menü
+  fog.admin.players:
+    description: Zugriff auf die Spieler-Liste im Admin-Menue
     default: op
 
-  ouh.admin.players.tpt:
-    description: Erlaubt Teleport zu einem bestimmten Spieler im Admin-Menü
+  fog.admin.players.tpt:
+    description: Erlaubt Teleport zu einem bestimmten Spieler im Admin-Menue
     default: op
 
-  ouh.admin.players.god:
-    description: Darf Godmode im Admin-Menü aktivieren
+  fog.admin.players.god:
+    description: Darf God Mode im Admin-Menue aktivieren
     default: op
 
   # --------------------- VANISH ----------------------
-  ouh.vanish:
+  fog.vanish:
     description: Erlaubt den /vanish Befehl
     default: op
 
-  ouh.vanish.item:
-    description: Zeigt die Vanish-Feder im Admin-Menü
+  fog.vanish.item:
+    description: Zeigt die Vanish-Feder im Admin-Menue
+    default: op
+
+  # --------------------- SPECTATOR ----------------------
+  fog.spectator:
+    description: Erlaubt den Spectator-Toggle im Admin-Menue
+    default: op
+
+  fog.spectator.item:
+    description: Zeigt den Spectator-Button ueber der Feder im Admin-Menue
     default: op
 
   # --------------------- TPA SYSTEM ----------------------
-  ouh.tpa.cooldown:
+  fog.tpa.cooldown:
     description: Reduziert den TPA-Cooldown auf 90 Sekunden
     default: op
 
   # --------------------- ROCKETS ----------------------
-  ouh.admin.rockets:
+  fog.admin.rockets:
     description: Darf Rockets toggeln
     default: op
 
   # --------------------- END TOGGLE ----------------------
-  ouh.admin.end:
-    description: Darf das End öffnen/schließen
+  fog.admin.end:
+    description: Darf das End oeffnen oder schliessen
     default: op
 
-  ouh.admin.nether:
-    description: Darf den Nether öffnen/schließen
+  fog.admin.nether:
+    description: Darf den Nether oeffnen oder schliessen
     default: op

@@ -22,11 +22,11 @@ public class VanishManager implements CommandExecutor, TabCompleter, Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player p)) {
-            sender.sendMessage("[OUH] Nur Spieler können diesen Befehl nutzen.");
+            sender.sendMessage("[FOG] Nur Spieler können diesen Befehl nutzen.");
             return true;
         }
 
-        if (!p.hasPermission("ouh.vanish")) {
+        if (!p.hasPermission("fog.vanish")) {
             Messages.send(p, ChatColor.RED + "Keine Berechtigung!");
             return true;
         }
@@ -84,7 +84,7 @@ public class VanishManager implements CommandExecutor, TabCompleter, Listener {
     // Prüft ob Blitzmodus aktiv (von AdminMenu)
     private boolean isLightningEnabled(Player p) {
         // Zugriff auf AdminMenu-Instanz
-        if (Bukkit.getPluginManager().getPlugin("OUH") instanceof smp ouh) {
+        if (Bukkit.getPluginManager().getPlugin("FOG") instanceof smp fog) {
             // AdminMenu hat static Zugriff
             return AdminMenu.isLightningActive(p);
         }

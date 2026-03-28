@@ -19,7 +19,7 @@ public class OpenNetherCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         if (sender instanceof Player p) {
-            if (!p.hasPermission("ouh.admin.nether")) {
+            if (!p.hasPermission("fog.admin.nether")) {
                 p.sendMessage(ChatColor.RED + "Keine Rechte!");
                 return true;
             }
