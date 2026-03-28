@@ -93,7 +93,7 @@ public class AdminMenu implements Listener, CommandExecutor {
     public void openMainMenu(Player p) {
         Inventory inv = Bukkit.createInventory(null, 27, ChatColor.DARK_BLUE + MAIN_MENU_TITLE);
 
-        if (p.hasPermission("fog.spectator.item")) {
+        if (p.hasPermission("fog.spectator")) {
             boolean active = p.getGameMode() == GameMode.SPECTATOR;
             inv.setItem(4, createItem(
                     Material.ENDER_EYE,
@@ -118,7 +118,7 @@ public class AdminMenu implements Listener, CommandExecutor {
                 "Permission: fog.admin.players"
         ));
 
-        if (p.hasPermission("fog.vanish.item")) {
+        if (p.hasPermission("fog.vanish")) {
             inv.setItem(13, createItem(
                     Material.FEATHER,
                     ChatColor.DARK_GRAY + "Vanish Toggle",

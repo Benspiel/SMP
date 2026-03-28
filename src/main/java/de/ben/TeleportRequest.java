@@ -50,7 +50,7 @@ public class TeleportRequest implements Listener, CommandExecutor, TabCompleter 
 
         // --- Cooldown prüfen ---
         long now = System.currentTimeMillis();
-        long cdMillis = sender.hasPermission("fog.tpa.cooldown") ? 90_000L : 360_000L;
+        long cdMillis = sender.hasPermission("fog.tpa.cooldown") ? 45_000L : 90_000L;
         long next = cooldowns.getOrDefault(sender.getUniqueId(), 0L);
 
         if (now < next) {

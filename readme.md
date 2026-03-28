@@ -53,11 +53,9 @@ nether-enabled: true
 | `fog.admin.players` | Zugriff auf die Spieler-Liste im Admin-Menue | `op` |
 | `fog.admin.players.tpt` | Erlaubt Teleport zu einem Spieler aus der Spieler-Liste | `op` |
 | `fog.admin.players.god` | Erlaubt God Mode fuer Spieler aus dem Admin-Menue | `op` |
-| `fog.vanish` | Erlaubt `/vanish` und den Vanish-Toggle im Menue | `op` |
-| `fog.vanish.item` | Zeigt die Feder fuer Vanish im Admin-Menue | `op` |
-| `fog.spectator` | Erlaubt den Spectator-Toggle im Admin-Menue | `op` |
-| `fog.spectator.item` | Zeigt den Spectator-Button ueber der Feder im Admin-Menue | `op` |
-| `fog.tpa.cooldown` | Reduziert den TPA-Cooldown auf 90 Sekunden | `op` |
+| `fog.vanish` | Erlaubt `/vanish` und zeigt den Vanish-Toggle im Admin-Menue | `op` |
+| `fog.spectator` | Erlaubt den Spectator-Toggle und zeigt den Spectator-Button im Admin-Menue | `op` |
+| `fog.tpa.cooldown` | Reduziert den TPA-Cooldown auf 45 Sekunden | `op` |
 | `fog.admin.rockets` | Erlaubt `/rockets` | `op` |
 | `fog.admin.end` | Erlaubt `/end` | `op` |
 | `fog.admin.nether` | Erlaubt `/opennether` | `op` |

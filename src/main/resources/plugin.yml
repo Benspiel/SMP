@@ -54,7 +54,7 @@ permissions:
     default: op
 
   fog.admin.item:
-    description: Erhaelt das Admin-Item beim Join
+    description: Gibt beim Join das Admin-Item
     default: op
 
   fog.admin.tpr:
@@ -75,25 +75,17 @@ permissions:
 
   # --------------------- VANISH ----------------------
   fog.vanish:
-    description: Erlaubt den /vanish Befehl
-    default: op
-
-  fog.vanish.item:
-    description: Zeigt die Vanish-Feder im Admin-Menue
+    description: Erlaubt den /vanish Befehl und zeigt die Vanish-Feder im Admin-Menue
     default: op
 
   # --------------------- SPECTATOR ----------------------
   fog.spectator:
-    description: Erlaubt den Spectator-Toggle im Admin-Menue
-    default: op
-
-  fog.spectator.item:
-    description: Zeigt den Spectator-Button ueber der Feder im Admin-Menue
+    description: Erlaubt den Spectator-Toggle und zeigt den Spectator-Button im Admin-Menue
     default: op
 
   # --------------------- TPA SYSTEM ----------------------
   fog.tpa.cooldown:
-    description: Reduziert den TPA-Cooldown auf 90 Sekunden
+    description: Reduziert den TPA-Cooldown auf 45 Sekunden
     default: op
 
   # --------------------- ROCKETS ----------------------
