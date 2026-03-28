@@ -1,182 +1,69 @@
-# 📄 **README.md – SMP Plugin**
+# SMP Plugin
 
-```markdown
-# SMP – Advanced Minecraft Server Plugin
+Ein modulares Paper-Plugin fuer SMP-Server mit Admin-Menue, Vanish, Spectator-Toggle, Teleport-System, End-/Nether-Steuerung und Rocket-Kontrolle.
 
-Ein umfangreiches und modular aufgebautes Paper 1.21.x Plugin für SMP-Server.  
-Es bietet Admin-Tools, Qualitätsverbesserungen, Teleportsystem, Vanish, End-Steuerung, Elytra-Rocket-Kontrolle und vieles mehr.
+## Features
 
----
+- Admin-Menue mit Random Teleport, Spielerliste, God Mode, Vanish, Spectator und Blitzmodus
+- Vanish-System mit eigener Permission und Menu-Eintrag
+- Spectator-Toggle direkt im Admin-Menue
+- TPA-System mit `/tpa`, `/tpahere`, `/tpaccept` und `/tpdeny`
+- Rockets global aktivierbar oder deaktivierbar
+- End und Nether per Command steuerbar
 
-## ✨ Features
+## Installation
 
-### 🛠️ Admin-Menü
-- `/admin`
-- GUI für Serververwaltung
-- Optionen für Teleport, God Mode, Spieler-Übersicht, Vanish, Admin-Item usw.
-- Permissions fein granular steuerbar (`ouh.admin.*`)
+1. Plugin bauen: `mvn clean package`
+2. JAR in den Server kopieren
+3. Server starten
 
-### 👻 Vanish-System
-- `/vanish`
-- Unsichtbarkeit inkl. Night-Vision
-- Vanish-Item im Admin-Menü
-- Mit Tab-Completer
+## Konfiguration
 
-### 📖 First Join / Hilfe
-- `/help`
-- Gibt ein Willkommens-/Info-Buch
-- Individuelle Join-Events für neue Spieler
-
-### 💬 Nachrichten-System
-- Eigener Prefix  
-- Custom Death Messages  
-- System-Nachrichten  
-- Join-/Leave-Handling
-
-### 🔁 Teleport-System
-- `/tpa` – Anfrage senden  
-- `/tpahere` – Spieler zu dir bitten  
-- `/tpaccept` – Anfrage annehmen  
-- `/tpdeny` – Anfrage ablehnen  
-- Mit Timeout, Actionbar-Nachrichten & Tab-Completer  
-- Optional reduzierter Cooldown per Permission
-
-### 🎆 Elytra Rocket Control
-- `/rockets` – Rockets global aktivieren/deaktivieren
-- Wenn deaktiviert:
-  - Spieler können keine Elytra-Raketen zünden
-  - 5-Sekunden-Cooldown für die Systemnachricht
-- Zustand wird automatisch in `config.yml` gespeichert
-
-### 🟣 End Welt Steuerung
-- `/openend` – End öffnen oder schließen
-- Wenn das End geschlossen ist:
-  - Kein Teleport durch End-Portale
-  - Kein Wechsel in die End-Dimension
-- Zustand wird in `config.yml` gespeichert
-
----
-
-## 📁 Installation
-
-1. Plugin kompilieren (`mvn clean package`)
-2. `SMP.jar` in den Server-Ordner kopieren:
-
-```
-
-/plugins/SMP.jar
-
-```
-
-3. Server starten  
-4. Die Config wird automatisch erstellt:
-
-```
-
-/plugins/smp/config.yml
-
-````
-
----
-
-## ⚙️ Konfiguration
-
-`config.yml`:
+`src/main/resources/config.yml`
 
 ```yaml
 rockets-enabled: true
 cooldown-seconds: 5
 end-enabled: true
-````
-
----
-
-## 🧭 Commands
-
-| Command     | Beschreibung                 | Permission          |
-| ----------- | ---------------------------- | ------------------- |
-| `/admin`    | Admin GUI öffnen             | `ouh.admin`         |
-| `/vanish`   | Unsichtbarkeit an/aus        | `ouh.vanish`        |
-| `/help`     | Willkommensbuch              | -                   |
-| `/tpa`      | Teleport-Anfrage senden      | -                   |
-| `/tpahere`  | Spieler zu dir teleportieren | -                   |
-| `/tpaccept` | Anfrage annehmen             | -                   |
-| `/tpdeny`   | Anfrage ablehnen             | -                   |
-| `/rockets`  | Rockets ein/aus              | `ouh.admin.rockets` |
-| `/openend`  | End öffnen/schließen         | `ouh.admin.end`     |
-
----
-
-## 🔐 Permissions
-
-```yaml
-ouh.admin               - Zugang zum Admin-Menü
-ouh.admin.item          - Admin-Item erhalten
-ouh.admin.tpr           - Random Teleport aus Admin-Menü
-ouh.admin.players       - Zugriff auf Spieler-Liste
-ouh.admin.players.tpt   - Teleport zu Spielern
-ouh.admin.players.god   - God-Mode in Admin-Menü
-
-ouh.vanish              - Darf /vanish benutzen
-ouh.vanish.item         - Vanish-Item anzeigen
-
-ouh.tpa.cooldown        - TPA Cooldown reduzieren
-
-ouh.admin.rockets       - Darf Rockets toggeln
-ouh.admin.end           - Darf End öffnen/schließen
+nether-enabled: true
 ```
 
----
+## Commands
 
-## 🧩 Kompatibilität
+| Command | Beschreibung | Permission |
+| --- | --- | --- |
+| `/admin` | Oeffnet das Admin-Menue | `fog.admin` |
+| `/vanish` | Schaltet Vanish an oder aus | `fog.vanish` |
+| `/help` | Gibt das Willkommens-Buch | - |
+| `/tpa <spieler>` | Sendet eine Teleport-Anfrage | - |
+| `/tpahere <spieler>` | Fragt an, ob ein Spieler zu dir teleportiert werden soll | - |
+| `/tpaccept` | Akzeptiert eine Teleport-Anfrage | - |
+| `/tpdeny` | Lehnt eine Teleport-Anfrage ab | - |
+| `/rockets` | Aktiviert oder deaktiviert Rockets | `fog.admin.rockets` |
+| `/end` | Oeffnet oder schliesst das End | `fog.admin.end` |
+| `/opennether` | Oeffnet oder schliesst den Nether | `fog.admin.nether` |
 
-* **Paper 1.21+**
-* Java **17–21**
-* Getestet mit LuckPerms
-* Funktioniert mit allen gängigen SMP-Serverstrukturen
+## Permissions
 
----
+| Permission | Beschreibung | Default |
+| --- | --- | --- |
+| `fog.admin` | Zugriff auf das Admin-Menue mit `/admin` | `op` |
+| `fog.admin.item` | Gibt beim Join das Admin-Item | `op` |
+| `fog.admin.tpr` | Erlaubt Random-Teleport im Admin-Menue | `op` |
+| `fog.admin.players` | Zugriff auf die Spieler-Liste im Admin-Menue | `op` |
+| `fog.admin.players.tpt` | Erlaubt Teleport zu einem Spieler aus der Spieler-Liste | `op` |
+| `fog.admin.players.god` | Erlaubt God Mode fuer Spieler aus dem Admin-Menue | `op` |
+| `fog.vanish` | Erlaubt `/vanish` und den Vanish-Toggle im Menue | `op` |
+| `fog.vanish.item` | Zeigt die Feder fuer Vanish im Admin-Menue | `op` |
+| `fog.spectator` | Erlaubt den Spectator-Toggle im Admin-Menue | `op` |
+| `fog.spectator.item` | Zeigt den Spectator-Button ueber der Feder im Admin-Menue | `op` |
+| `fog.tpa.cooldown` | Reduziert den TPA-Cooldown auf 90 Sekunden | `op` |
+| `fog.admin.rockets` | Erlaubt `/rockets` | `op` |
+| `fog.admin.end` | Erlaubt `/end` | `op` |
+| `fog.admin.nether` | Erlaubt `/opennether` | `op` |
 
-## 📂 Projektstruktur (empfohlen)
+## Hinweise
 
-```
-src/
- ├── main/
- │    ├── java/de/ben/
- │    │      ├── smp.java
- │    │      ├── AdminMenu.java
- │    │      ├── VanishManager.java
- │    │      ├── FirstJoin.java
- │    │      ├── Messages.java
- │    │      ├── TeleportRequest.java
- │    │      ├── rockets/
- │    │      │      ├── RocketCommand.java
- │    │      │      └── RocketListener.java
- │    │      └── end/
- │    │             ├── OpenEndCommand.java
- │    │             └── EndBlocker.java
- │    └── resources/
- │           └── plugin.yml
- ├── pom.xml
-```
-
----
-
-## ❤️ Support & Erweiterungen
-
-Dieses Plugin ist modular aufgebaut und lässt sich leicht erweitern:
-
-* Extra Menüs
-* Scoreboards
-* Bossbars
-* Timer-Systeme
-* World-Management
-* Custom Items
-
-Wenn du neue Features brauchst → einfach melden!
-
----
-
-## 📜 Lizenz
-
-Dieses Plugin darf frei genutzt, angepasst und erweitert werden.
+- API-Version: `1.21`
+- Java-Version laut `pom.xml`: `21`
+- Die Permissions stammen direkt aus `src/main/resources/plugin.yml`
