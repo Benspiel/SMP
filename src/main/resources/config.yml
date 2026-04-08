@@ -1,4 +1,5 @@
 rockets-enabled: true
+infinite-trading-enabled: false
 cooldown-seconds: 5
 end-enabled: true
 nether-enabled: true

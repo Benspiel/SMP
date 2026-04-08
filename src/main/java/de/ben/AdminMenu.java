@@ -36,10 +36,12 @@ public class AdminMenu implements Listener, CommandExecutor {
 
     private static final Set<UUID> lightningMode = new HashSet<>();
 
+    private final smp plugin;
     private final Map<UUID, GameMode> previousGameModes = new HashMap<>();
     private final Random random = new Random();
 
     public AdminMenu(smp plugin) {
+        this.plugin = plugin;
     }
 
     @Override
@@ -133,6 +135,16 @@ public class AdminMenu implements Listener, CommandExecutor {
                     Material.TRIDENT,
                     ChatColor.AQUA + "Blitzmodus: " + (active ? ChatColor.GREEN + "AN" : ChatColor.RED + "AUS"),
                     "Wenn aktiv, schlaegt bei Teleports oder Vanish ein Blitz ein"
+            ));
+        }
+
+        if (p.hasPermission("fog.admin.trading")) {
+            boolean active = plugin.getConfig().getBoolean("infinite-trading-enabled");
+            inv.setItem(24, createItem(
+                    Material.EMERALD,
+                    ChatColor.GREEN + "Infinite Trading: " + (active ? ChatColor.GREEN + "AN" : ChatColor.RED + "AUS"),
+                    "Villager-Trades verbrauchen sich nicht",
+                    "Permission: fog.admin.trading"
             ));
         }
 
@@ -249,6 +261,12 @@ public class AdminMenu implements Listener, CommandExecutor {
                 Messages.send(player, ChatColor.GREEN + "Blitzmodus aktiviert.");
             }
             player.closeInventory();
+            return;
+        }
+
+        if (name.startsWith("Infinite Trading") && player.hasPermission("fog.admin.trading")) {
+            toggleInfiniteTrading(player);
+            player.closeInventory();
         }
     }
 
@@ -357,6 +375,19 @@ public class AdminMenu implements Listener, CommandExecutor {
         if (lightningMode.contains(player.getUniqueId())) {
             player.getWorld().strikeLightningEffect(player.getLocation());
         }
+    }
+
+    private void toggleInfiniteTrading(Player player) {
+        boolean newState = !plugin.getConfig().getBoolean("infinite-trading-enabled");
+        plugin.getConfig().set("infinite-trading-enabled", newState);
+        plugin.saveConfig();
+
+        Messages.send(
+                player,
+                ChatColor.GREEN + "Infinite Trading ist jetzt "
+                        + (newState ? ChatColor.GREEN + "aktiviert" : ChatColor.RED + "deaktiviert")
+                        + ChatColor.GREEN + "."
+        );
     }
 
     private boolean isManagedMenu(String title) {

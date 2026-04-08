@@ -2,13 +2,13 @@ package de.ben;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameRule;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerAdvancementDoneEvent;
-import org.bukkit.advancement.Advancement;
-import org.bukkit.advancement.AdvancementProgress;
+import org.bukkit.event.world.WorldLoadEvent;
 
 public class Messages implements Listener {
 
@@ -22,28 +22,19 @@ public class Messages implements Listener {
         Bukkit.getServer().broadcastMessage(PREFIX + msg);
     }
 
-    @EventHandler
-    public void onDeath(PlayerDeathEvent event) {
-        String msg = event.getDeathMessage();
-        if (msg != null) {
-            event.setDeathMessage(PREFIX + ChatColor.RED + msg);
+    public static void disableVanillaAdvancementAnnouncements() {
+        for (World world : Bukkit.getWorlds()) {
+            world.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
         }
     }
 
     @EventHandler
-    public void onAdvancement(PlayerAdvancementDoneEvent event) {
-        Player p = event.getPlayer();
-        Advancement adv = event.getAdvancement();
-        AdvancementProgress progress = p.getAdvancementProgress(adv);
-        if (!progress.isDone()) return;
+    public void onDeath(PlayerDeathEvent event) {
+        event.setDeathMessage(null);
+    }
 
-        String key = adv.getKey().getKey();
-        String[] parts = key.split("/");
-        String name = parts[parts.length - 1].replace("_", " ");
-
-        broadcast(ChatColor.GOLD + p.getName() +
-                ChatColor.YELLOW + " hat das Advancement " +
-                ChatColor.AQUA + "\"" + name + "\"" +
-                ChatColor.YELLOW + " abgeschlossen!");
+    @EventHandler
+    public void onWorldLoad(WorldLoadEvent event) {
+        event.getWorld().setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
     }
 }

@@ -73,6 +73,10 @@ permissions:
     description: Darf God Mode im Admin-Menue aktivieren
     default: op
 
+  fog.admin.trading:
+    description: Darf Infinite Trading im Admin-Menue umschalten
+    default: op
+
   # --------------------- VANISH ----------------------
   fog.vanish:
     description: Erlaubt den /vanish Befehl und zeigt die Vanish-Feder im Admin-Menue
