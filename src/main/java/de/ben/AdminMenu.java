@@ -30,18 +30,17 @@ import java.util.UUID;
 
 public class AdminMenu implements Listener, CommandExecutor {
 
+    private static final String PREFIX = ChatColor.DARK_AQUA + "[FOG] " + ChatColor.RESET;
     private static final String MAIN_MENU_TITLE = "FOG Admin Menu";
     private static final String PLAYER_LIST_TITLE = "FOG Player List";
     private static final String PLAYER_OPTIONS_PREFIX = "FOG Player Options: ";
 
     private static final Set<UUID> lightningMode = new HashSet<>();
 
-    private final smp plugin;
     private final Map<UUID, GameMode> previousGameModes = new HashMap<>();
     private final Random random = new Random();
 
-    public AdminMenu(smp plugin) {
-        this.plugin = plugin;
+    public AdminMenu() {
     }
 
     @Override
@@ -51,7 +50,7 @@ public class AdminMenu implements Listener, CommandExecutor {
             return true;
         }
         if (!p.hasPermission("fog.admin")) {
-            Messages.send(p, ChatColor.RED + "Keine Berechtigung.");
+            sendMessage(p, ChatColor.RED + "Keine Berechtigung.");
             return true;
         }
         openMainMenu(p);
@@ -138,16 +137,6 @@ public class AdminMenu implements Listener, CommandExecutor {
             ));
         }
 
-        if (p.hasPermission("fog.admin.trading")) {
-            boolean active = plugin.getConfig().getBoolean("infinite-trading-enabled");
-            inv.setItem(24, createItem(
-                    Material.EMERALD,
-                    ChatColor.GREEN + "Infinite Trading: " + (active ? ChatColor.GREEN + "AN" : ChatColor.RED + "AUS"),
-                    "Villager-Trades verbrauchen sich nicht",
-                    "Permission: fog.admin.trading"
-            ));
-        }
-
         p.openInventory(inv);
     }
 
@@ -228,13 +217,13 @@ public class AdminMenu implements Listener, CommandExecutor {
             List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
             players.remove(player);
             if (players.isEmpty()) {
-                Messages.send(player, ChatColor.RED + "Keine Spieler online!");
+                sendMessage(player, ChatColor.RED + "Keine Spieler online!");
                 return;
             }
 
             Player target = players.get(random.nextInt(players.size()));
             player.teleport(target.getLocation());
-            Messages.send(player, ChatColor.GREEN + "Teleportiert zu " + target.getName());
+            sendMessage(player, ChatColor.GREEN + "Teleportiert zu " + target.getName());
             strikeLightningIfEnabled(player);
             player.closeInventory();
             return;
@@ -255,17 +244,11 @@ public class AdminMenu implements Listener, CommandExecutor {
         if (name.startsWith("Blitzmodus") && player.isOp()) {
             if (lightningMode.contains(player.getUniqueId())) {
                 lightningMode.remove(player.getUniqueId());
-                Messages.send(player, ChatColor.YELLOW + "Blitzmodus deaktiviert.");
+                sendMessage(player, ChatColor.YELLOW + "Blitzmodus deaktiviert.");
             } else {
                 lightningMode.add(player.getUniqueId());
-                Messages.send(player, ChatColor.GREEN + "Blitzmodus aktiviert.");
+                sendMessage(player, ChatColor.GREEN + "Blitzmodus aktiviert.");
             }
-            player.closeInventory();
-            return;
-        }
-
-        if (name.startsWith("Infinite Trading") && player.hasPermission("fog.admin.trading")) {
-            toggleInfiniteTrading(player);
             player.closeInventory();
         }
     }
@@ -295,7 +278,7 @@ public class AdminMenu implements Listener, CommandExecutor {
 
         if (name.equalsIgnoreCase("Teleport") && player.hasPermission("fog.admin.players.tpt")) {
             player.teleport(target.getLocation());
-            Messages.send(player, ChatColor.GREEN + "Teleportiert zu " + target.getName());
+            sendMessage(player, ChatColor.GREEN + "Teleportiert zu " + target.getName());
             strikeLightningIfEnabled(player);
             player.closeInventory();
             return;
@@ -303,7 +286,7 @@ public class AdminMenu implements Listener, CommandExecutor {
 
         if (name.equalsIgnoreCase("God Mode") && player.hasPermission("fog.admin.players.god")) {
             target.setInvulnerable(!target.isInvulnerable());
-            Messages.send(
+            sendMessage(
                     player,
                     ChatColor.YELLOW + "God Mode fuer " + target.getName()
                             + (target.isInvulnerable() ? " aktiviert" : " deaktiviert")
@@ -362,13 +345,13 @@ public class AdminMenu implements Listener, CommandExecutor {
             GameMode previousMode = previousGameModes.getOrDefault(uuid, GameMode.SURVIVAL);
             previousGameModes.remove(uuid);
             player.setGameMode(previousMode);
-            Messages.send(player, ChatColor.YELLOW + "Spectator deaktiviert.");
+            sendMessage(player, ChatColor.YELLOW + "Spectator deaktiviert.");
             return;
         }
 
         previousGameModes.put(uuid, player.getGameMode());
         player.setGameMode(GameMode.SPECTATOR);
-        Messages.send(player, ChatColor.GREEN + "Spectator aktiviert.");
+        sendMessage(player, ChatColor.GREEN + "Spectator aktiviert.");
     }
 
     private void strikeLightningIfEnabled(Player player) {
@@ -377,23 +360,14 @@ public class AdminMenu implements Listener, CommandExecutor {
         }
     }
 
-    private void toggleInfiniteTrading(Player player) {
-        boolean newState = !plugin.getConfig().getBoolean("infinite-trading-enabled");
-        plugin.getConfig().set("infinite-trading-enabled", newState);
-        plugin.saveConfig();
-
-        Messages.send(
-                player,
-                ChatColor.GREEN + "Infinite Trading ist jetzt "
-                        + (newState ? ChatColor.GREEN + "aktiviert" : ChatColor.RED + "deaktiviert")
-                        + ChatColor.GREEN + "."
-        );
-    }
-
     private boolean isManagedMenu(String title) {
         return MAIN_MENU_TITLE.equals(title)
                 || PLAYER_LIST_TITLE.equals(title)
                 || title.startsWith(PLAYER_OPTIONS_PREFIX);
+    }
+
+    private void sendMessage(Player player, String message) {
+        player.sendMessage(PREFIX + message);
     }
 
     public static boolean isLightningActive(Player p) {

@@ -17,6 +17,7 @@ import java.util.*;
 
 public class VanishManager implements CommandExecutor, TabCompleter, Listener {
 
+    private static final String PREFIX = ChatColor.DARK_AQUA + "[FOG] " + ChatColor.RESET;
     private final Set<UUID> vanished = new HashSet<>();
 
     @Override
@@ -27,7 +28,7 @@ public class VanishManager implements CommandExecutor, TabCompleter, Listener {
         }
 
         if (!p.hasPermission("fog.vanish")) {
-            Messages.send(p, ChatColor.RED + "Keine Berechtigung!");
+            sendMessage(p, ChatColor.RED + "Keine Berechtigung!");
             return true;
         }
 
@@ -40,7 +41,7 @@ public class VanishManager implements CommandExecutor, TabCompleter, Listener {
                 other.showPlayer(p);
             }
             p.removePotionEffect(PotionEffectType.NIGHT_VISION);
-            Messages.send(p, ChatColor.YELLOW + "Vanish deaktiviert.");
+            sendMessage(p, ChatColor.YELLOW + "Vanish deaktiviert.");
 
             // Blitz, falls Blitzmodus aktiv
             if (isLightningEnabled(p)) {
@@ -55,7 +56,7 @@ public class VanishManager implements CommandExecutor, TabCompleter, Listener {
             }
             p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION,
                     Integer.MAX_VALUE, 0, true, false, false));
-            Messages.send(p, ChatColor.GREEN + "Vanish aktiviert.");
+            sendMessage(p, ChatColor.GREEN + "Vanish aktiviert.");
         }
 
         return true;
@@ -89,5 +90,9 @@ public class VanishManager implements CommandExecutor, TabCompleter, Listener {
             return AdminMenu.isLightningActive(p);
         }
         return false;
+    }
+
+    private void sendMessage(Player player, String message) {
+        player.sendMessage(PREFIX + message);
     }
 }

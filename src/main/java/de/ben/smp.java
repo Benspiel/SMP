@@ -2,7 +2,6 @@ package de.ben;
 
 import de.ben.rockets.RocketCommand;
 import de.ben.rockets.RocketListener;
-import de.ben.trading.InfiniteTradingListener;
 import de.ben.end.OpenEndCommand;
 import de.ben.end.EndBlocker;
 import de.ben.nether.OpenNetherCommand;
@@ -26,7 +25,7 @@ public final class smp extends JavaPlugin {
 
         // 2. ADMIN & VANISH SYSTEM
         // Das Admin-Menü und der Vanish-Manager werden initialisiert und registriert.
-        AdminMenu adminMenu = new AdminMenu(this);
+        AdminMenu adminMenu = new AdminMenu();
         Bukkit.getPluginManager().registerEvents(adminMenu, this);
         getCommand("admin").setExecutor(adminMenu);
 
@@ -39,11 +38,7 @@ public final class smp extends JavaPlugin {
         FirstJoin firstJoin = new FirstJoin(this);
         getCommand("help").setExecutor(firstJoin);
 
-        // 4. MESSAGES SYSTEM
-        Bukkit.getPluginManager().registerEvents(new Messages(), this);
-        Messages.disableVanillaAdvancementAnnouncements();
-
-        // 5. TELEPORT SYSTEM (TPA)
+        // 4. TELEPORT SYSTEM (TPA)
         TeleportRequest tpa = new TeleportRequest();
         tpa.init(this);
         Bukkit.getPluginManager().registerEvents(tpa, this);
@@ -55,22 +50,18 @@ public final class smp extends JavaPlugin {
         getCommand("tpa").setTabCompleter(tpa);
         getCommand("tpahere").setTabCompleter(tpa);
 
-        // 6. ROCKETS SYSTEM
+        // 5. ROCKETS SYSTEM
         getCommand("rockets").setExecutor(new RocketCommand(this));
         Bukkit.getPluginManager().registerEvents(new RocketListener(this), this);
 
-        // 7. INFINITE TRADING (NEU)
-        // Registriert den Listener für unendliches Handeln und XP-Filter.
-        Bukkit.getPluginManager().registerEvents(new InfiniteTradingListener(this), this);
-
-        // 8. DIMENSIONS SYSTEM (END & NETHER)
+        // 6. DIMENSIONS SYSTEM (END & NETHER)
         getCommand("end").setExecutor(new OpenEndCommand(this));
         Bukkit.getPluginManager().registerEvents(new EndBlocker(this), this);
 
         getCommand("opennether").setExecutor(new OpenNetherCommand(this));
         Bukkit.getPluginManager().registerEvents(new NetherBlocker(this), this);
 
-        // 9. STATUS LOG
+        // 7. STATUS LOG
         printStatusLog();
     }
 
@@ -88,9 +79,9 @@ public final class smp extends JavaPlugin {
         getLogger().info("=======================================");
         getLogger().info(" SMP Plugin erfolgreich gestartet!");
         getLogger().info(" Rockets: " + getConfig().getBoolean("rockets-enabled"));
-        getLogger().info(" Trading: " + getConfig().getBoolean("infinite-trading-enabled"));
         getLogger().info(" End:     " + getConfig().getBoolean("end-enabled"));
         getLogger().info(" Nether:  " + getConfig().getBoolean("nether-enabled"));
         getLogger().info("=======================================");
     }
 }
+
