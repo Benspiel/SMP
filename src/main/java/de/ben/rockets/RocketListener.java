@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -23,14 +22,11 @@ public class RocketListener implements Listener {
 
     @EventHandler
     public void onRocketUse(PlayerInteractEvent e) {
-
-        if (e.getHand() != EquipmentSlot.HAND) return;
-
         Player p = e.getPlayer();
 
         if (plugin.getConfig().getBoolean("rockets-enabled")) return;
 
-        if (p.getInventory().getItemInMainHand().getType() != Material.FIREWORK_ROCKET) return;
+        if (e.getMaterial() != Material.FIREWORK_ROCKET) return;
         if (!p.isGliding()) return;
 
         e.setCancelled(true);
