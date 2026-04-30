@@ -17,7 +17,7 @@ Ein modulares Paper-Plugin fuer SMP-Server mit Admin-Menue, Vanish, Spectator-To
 2. JAR in den Server kopieren
 3. Server starten
 
-## Konfiguration
+## Konfiguratio
 
 `src/main/resources/config.yml`
 
